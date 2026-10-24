@@ -15,6 +15,7 @@
       background: #12232c;
       color: #e8ecee;
       font-family: Arial, Helvetica, sans-serif;
+      transition: 0.3s;
     }
 
     nav {
@@ -114,6 +115,45 @@
       background: #ffc33d;
     }
 
+    /* LIGHT MODE */
+
+    body.light {
+      background: #f3f5f6;
+      color: #17232b;
+    }
+
+    body.light nav {
+      background: #ffffff;
+      border-bottom-color: #d5dde1;
+    }
+
+    body.light nav a {
+      color: #17232b;
+    }
+
+    body.light nav a.active {
+      color: #087d70;
+      border-bottom-color: #087d70;
+    }
+
+    body.light .theme-btn {
+      color: #17232b;
+    }
+
+    body.light .contact-container {
+      background: #ffffff;
+      border-color: #d5dde1;
+    }
+
+    body.light input,
+    body.light textarea {
+      background: #f8fafb;
+      color: #17232b;
+      border-color: #bdc9cf;
+    }
+
+    /* MOBILE */
+
     @media (max-width: 650px) {
       nav {
         gap: 18px;
@@ -135,7 +175,7 @@
     <a href="#">Courses</a>
     <a href="#" class="active">Contact</a>
 
-    <button class="theme-btn">
+    <button class="theme-btn" id="themeButton">
       Light mode
     </button>
   </nav>
@@ -143,10 +183,11 @@
 
   <div class="contact-container">
 
-    <form>
+    <form id="contactForm">
 
       <div class="form-group">
         <label for="name">Name</label>
+
         <input
           type="text"
           id="name"
@@ -157,6 +198,7 @@
 
       <div class="form-group">
         <label for="email">Email</label>
+
         <input
           type="email"
           id="email"
@@ -167,6 +209,7 @@
 
       <div class="form-group">
         <label for="message">Message</label>
+
         <textarea
           id="message"
           name="message"
@@ -189,19 +232,53 @@
   <script>
 
     const themeButton =
-      document.querySelector(".theme-btn");
+      document.getElementById("themeButton");
 
-    themeButton.addEventListener("click", () => {
+
+    themeButton.addEventListener("click", function () {
 
       document.body.classList.toggle("light");
 
-      if (
-        document.body.classList.contains("light")
-      ) {
+      if (document.body.classList.contains("light")) {
+
         themeButton.textContent = "Dark mode";
+
       } else {
+
         themeButton.textContent = "Light mode";
+
       }
+
+    });
+
+
+    const form =
+      document.getElementById("contactForm");
+
+
+    form.addEventListener("submit", function (event) {
+
+      event.preventDefault();
+
+      const name =
+        document.getElementById("name").value;
+
+      const email =
+        document.getElementById("email").value;
+
+      const message =
+        document.getElementById("message").value;
+
+
+      if (!name || !email || !message) {
+
+        alert("Please fill in all fields.");
+
+        return;
+      }
+
+
+      alert("Message prepared successfully!");
 
     });
 
